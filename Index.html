@@ -290,7 +290,6 @@
         .panel-pin-btn {
             position: absolute;
             bottom: 70px;
-            right: 15px;
             background: rgba(255, 255, 255, 0.15);
             border: none;
             color: white;
@@ -315,6 +314,14 @@
             background: var(--primary-color);
         }
 
+        .left-panel .panel-pin-btn {
+            right: 15px;
+        }
+
+        .right-panel .panel-pin-btn {
+            left: 15px;
+        }
+
         .left-panel.mobile-open .panel-pin-btn,
         .right-panel.mobile-open .panel-pin-btn {
             display: flex;
@@ -330,6 +337,13 @@
             min-width: 0;
         }
 
+        /* Main content fixed mode */
+        body.fixed-content .main-content {
+            margin-left: var(--left-panel-width) !important;
+            margin-right: var(--right-panel-width) !important;
+        }
+
+        /* Desktop panel daraltma */
         .left-panel.collapsed ~ .main-content {
             margin-left: var(--collapsed-width);
         }
@@ -341,6 +355,78 @@
         .left-panel.collapsed ~ .right-panel.collapsed ~ .main-content {
             margin-left: var(--collapsed-width);
             margin-right: var(--collapsed-width);
+        }
+
+        /* Fixed content mode-da panel daraltma təsir etməməli */
+        body.fixed-content .left-panel.collapsed ~ .main-content {
+            margin-left: var(--left-panel-width) !important;
+        }
+
+        body.fixed-content .right-panel.collapsed ~ .main-content {
+            margin-right: var(--right-panel-width) !important;
+        }
+
+        body.fixed-content .left-panel.collapsed ~ .right-panel.collapsed ~ .main-content {
+            margin-left: var(--left-panel-width) !important;
+            margin-right: var(--right-panel-width) !important;
+        }
+
+        /* Mobil cihazlarda sabitlənmiş panellər */
+        @media (max-width: 768px) {
+            /* Sol panel tam açıq və pin edilmiş */
+            body.left-pinned.left-full .main-content {
+                margin-left: 280px !important;
+            }
+
+            /* Sol panel collapsed və pin edilmiş */
+            body.left-pinned.left-collapsed .main-content {
+                margin-left: 70px !important;
+            }
+
+            /* Sağ panel tam açıq və pin edilmiş */
+            body.right-pinned.right-full .main-content {
+                margin-right: 280px !important;
+            }
+
+            /* Sağ panel collapsed və pin edilmiş */
+            body.right-pinned.right-collapsed .main-content {
+                margin-right: 70px !important;
+            }
+
+            /* Fixed content mode mobil */
+            body.fixed-content.left-pinned .main-content,
+            body.fixed-content.right-pinned .main-content {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            /* Panellər dəyişdirildikdə */
+            body.panels-swapped.left-pinned.left-full .main-content {
+                margin-right: 280px !important;
+                margin-left: 0 !important;
+            }
+
+            body.panels-swapped.left-pinned.left-collapsed .main-content {
+                margin-right: 70px !important;
+                margin-left: 0 !important;
+            }
+
+            body.panels-swapped.right-pinned.right-full .main-content {
+                margin-left: 280px !important;
+                margin-right: 0 !important;
+            }
+
+            body.panels-swapped.right-pinned.right-collapsed .main-content {
+                margin-left: 70px !important;
+                margin-right: 0 !important;
+            }
+
+            /* Fixed content swap mode */
+            body.panels-swapped.fixed-content.left-pinned .main-content,
+            body.panels-swapped.fixed-content.right-pinned .main-content {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
         }
 
         .header {
@@ -462,6 +548,7 @@
             align-items: center;
             gap: 10px;
             color: white;
+            margin-top: 0;
         }
 
         .info-box p {
@@ -498,45 +585,6 @@
         .setting-item .value {
             font-size: 16px;
             font-weight: 600;
-        }
-
-        .gesture-demo {
-            background: var(--background-color);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 15px;
-            text-align: center;
-        }
-
-        .gesture-demo i {
-            font-size: 48px;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .gesture-arrows {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        .gesture-arrow {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .gesture-arrow i {
-            font-size: 32px;
-            color: var(--primary-color);
-        }
-
-        .gesture-arrow span {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--secondary-color);
         }
 
         /* Sağ Menü Stilləri */
@@ -728,11 +776,6 @@
             white-space: nowrap;
         }
 
-        /* Mobil Düymələr */
-        .mobile-menu-toggle, .mobile-right-toggle {
-            display: none;
-        }
-
         /* Overlay */
         .overlay {
             display: none;
@@ -764,6 +807,16 @@
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         }
 
+        body.panels-swapped .left-panel .panel-pin-btn {
+            right: auto;
+            left: 15px;
+        }
+
+        body.panels-swapped .right-panel .panel-pin-btn {
+            left: auto;
+            right: 15px;
+        }
+
         body.panels-swapped .main-content {
             margin-left: var(--right-panel-width);
             margin-right: var(--left-panel-width);
@@ -782,9 +835,10 @@
             margin-right: var(--collapsed-width);
         }
 
-        body.panels-swapped .panel-pin-btn {
-            right: auto;
-            left: 15px;
+        /* Fixed content swap mode */
+        body.panels-swapped.fixed-content .main-content {
+            margin-left: var(--right-panel-width) !important;
+            margin-right: var(--left-panel-width) !important;
         }
 
         /* Responsive Dizayn */
@@ -864,6 +918,16 @@
                 margin-right: var(--collapsed-width);
             }
 
+            body.fixed-content .main-content {
+                margin-left: var(--left-panel-width) !important;
+                margin-right: var(--right-panel-width) !important;
+            }
+
+            body.panels-swapped.fixed-content .main-content {
+                margin-left: var(--right-panel-width) !important;
+                margin-right: var(--left-panel-width) !important;
+            }
+
             .feature-grid {
                 grid-template-columns: 1fr;
             }
@@ -887,14 +951,6 @@
             }
 
             .right-panel.mobile-open {
-                transform: translateX(0);
-            }
-
-            .left-panel.mobile-open.pinned {
-                transform: translateX(0);
-            }
-
-            .right-panel.mobile-open.pinned {
                 transform: translateX(0);
             }
 
@@ -957,11 +1013,6 @@
             .settings-display {
                 grid-template-columns: 1fr;
             }
-
-            .gesture-arrows {
-                flex-direction: column;
-                gap: 20px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1020,7 +1071,7 @@
         }
     </style>
 </head>
-<body>
+<body class="blue-theme">
     <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
 
@@ -1055,7 +1106,7 @@
                 <i class="fas fa-calendar-alt"></i>
                 <span class="menu-text">Təqvim</span>
             </div>
-            <div class="menu-menu-item">
+            <div class="menu-item">
                 <i class="fas fa-file-alt"></i>
                 <span class="menu-text">Fayllar</span>
             </div>
@@ -1081,8 +1132,6 @@
                 <span style="font-size: 12px; margin-bottom: 5px;">Dil:</span>
                 <div class="language-options">
                     <div class="language-option active" data-lang="az">AZ</div>
-                    <div class="language-option" data-lang="tr">TR</div>
-                    <div class="language-option" data-lang="en">EN</div>
                     <div class="language-option" data-lang="ru">RU</div>
                 </div>
             </div>
@@ -1090,6 +1139,11 @@
             <button class="footer-btn" id="swapPanels">
                 <i class="fas fa-exchange-alt"></i>
                 <span>Panelləri Dəyiş</span>
+            </button>
+
+            <button class="footer-btn" id="fixedContent">
+                <i class="fas fa-lock"></i>
+                <span>Məzmunu Sabitlə</span>
             </button>
         </div>
         
@@ -1107,15 +1161,15 @@
     <div class="main-content">
         <div class="header">
             <div>
-                <h1 class="page-title" id="pageTitle">Xoş Gəlmisiniz</h1>
-                <div class="breadcrumb" id="breadcrumb">Ana Səhifə / Panel İdarəetməsi</div>
+                <h1 class="page-title">Xoş Gəlmisiniz</h1>
+                <div class="breadcrumb">Ana Səhifə / Panel İdarəetməsi</div>
             </div>
         </div>
 
         <!-- Cari Tənzimləmələr -->
         <div class="info-box">
-            <h3><i class="fas fa-info-circle"></i> <span id="currentSettingsTitle">Cari Tənzimləmələriniz</span></h3>
-            <p id="currentSettingsDesc">Aşağıdakı tənzimləmələriniz avtomatik olaraq saxlanılır və növbəti dəfə səhifəyə daxil olduğunuzda bərpa edilir.</p>
+            <h3><i class="fas fa-info-circle"></i> <span>Cari Tənzimləmələriniz</span></h3>
+            <p>Aşağıdakı tənzimləmələriniz avtomatik olaraq saxlanılır və növbəti dəfə səhifəyə daxil olduğunuzda bərpa edilir.</p>
             <div class="settings-display">
                 <div class="setting-item">
                     <i class="fas fa-palette"></i>
@@ -1149,145 +1203,72 @@
         </div>
 
         <div class="content-card">
-            <h2><i class="fas fa-paint-brush"></i> <span id="mainContentTitle1">Panel Dizaynı Haqqında</span></h2>
-            <p id="contentText1">Bu səhifə müasir və funksional bir interfeys dizaynı təqdim edir. Sol panel naviqasiya menyusu kimi, sağ panel isə fəaliyyət və məlumat paneli kimi işləyir. Alt paneldə isə əsas əməliyyatlar üçün sürətli giriş düymələri yerləşir.</p>
-            <p id="contentText2">Bütün tənzimləmələriniz (rəng teması, dil, panel düzülüşü və görünüş rejimi) brauzerin yaddaşında (localStorage) saxlanılır və növbəti dəfə səhifəyə daxil olduğunuzda avtomatik olaraq bərpa edilir.</p>
+            <h2><i class="fas fa-paint-brush"></i> <span>Panel Dizaynı Haqqında</span></h2>
+            <p>Bu səhifə müasir və funksional bir interfeys dizaynı təqdim edir. Sol panel naviqasiya menyusu kimi, sağ panel isə fəaliyyət və məlumat paneli kimi işləyir. Alt paneldə isə əsas əməliyyatlar üçün sürətli giriş düymələri yerləşir.</p>
+            <p>Bütün tənzimləmələriniz (rəng teması, dil, panel düzülüşü və görünüş rejimi) brauzerin yaddaşında (localStorage) saxlanılır və növbəti dəfə səhifəyə daxil olduğunuzda avtomatik olaraq bərpa edilir.</p>
         </div>
 
         <div class="content-card">
-            <h2><i class="fas fa-hand-pointer"></i> <span id="gestureTitle">Touch Gesture İdarəetməsi</span></h2>
-            <p id="gestureDesc1">Mobil cihazlarda panelləri açmaq üçün ekranın kənarlarından içəriyə doğru barmağınızı sürüşdürün (swipe). Sistem panellərin yerləşməsinə uyğun olaraq işləyir:</p>
+            <h2><i class="fas fa-cogs"></i> <span>Yeni Xüsusiyyətlər</span></h2>
             
-            <div class="gesture-demo">
-                <i class="fas fa-mobile-alt"></i>
-                <h3 id="gestureDemoTitle" style="color: var(--primary-color); margin-top: 10px;">Swipe İstiqamətləri</h3>
-                <div class="gesture-arrows">
-                    <div class="gesture-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                        <span id="swipeRightLabel">Sağa Swipe</span>
-                        <p id="swipeRightDesc" style="font-size: 12px; margin-top: 5px;">Sol tərəfdəki paneli açar</p>
-                    </div>
-                    <div class="gesture-arrow">
-                        <i class="fas fa-arrow-left"></i>
-                        <span id="swipeLeftLabel">Sola Swipe</span>
-                        <p id="swipeLeftDesc" style="font-size: 12px; margin-top: 5px;">Sağ tərəfdəki paneli açar</p>
-                    </div>
-                </div>
-            </div>
-
-            <h3><i class="fas fa-thumbtack"></i> <span id="pinFeatureTitle">Panel Sabitləmə Funksiyası</span></h3>
-            <p id="pinFeatureDesc1">Mobil cihazlarda panel açıldığında aşağı sağ küncdə (və ya panellər dəyişdirilibsə sol küncdə) sabitləmə düyməsi görünür. Bu düyməyə basdıqda:</p>
+            <h3><i class="fas fa-compress-arrows-alt"></i> <span>Panel Daraltma və Genişləndirmə</span></h3>
+            <p>Hər iki panel üçün tam və yarımçıq (daraldılmış) versiyalar mövcuddur:</p>
             <ul style="margin-left: 25px; line-height: 2;">
-                <li id="pinFeature1"><strong>Panel sabitleşir:</strong> Overlay-ə və ya başqa yerə klikləyəndə panel bağlanmır</li>
-                <li id="pinFeature2"><strong>Düymə rəngi dəyişir:</strong> Sabitlənmiş vəziyyətdə düymə mavi rəngə çevrilir</li>
-                <li id="pinFeature3"><strong>Yenidən basanda açılır:</strong> Sabitləməni götürmək üçün yenidən düyməyə basın</li>
+                <li><strong>Tam versiya:</strong> Panel bütün məzmunu ilə görünür (250px/300px)</li>
+                <li><strong>Yarımçıq versiya:</strong> Panel yalnız ikonları göstərir (70px)</li>
+                <li><strong>Desktop-da:</strong> Aşağıdakı ox düymələri ilə daraldıb genişləndirin</li>
+                <li><strong>Mobil-də:</strong> Panel açıldıqda istənilən halda pin edə bilərsiniz</li>
             </ul>
 
-            <h3><i class="fas fa-sync-alt"></i> <span id="swappedGestureTitle">Panellər Dəyişdikdə</span></h3>
-            <p id="swappedGestureDesc">Əgər "Panelləri Dəyiş" düyməsini istifadə edərək panellərin yerini dəyişdirirsinizsə, swipe istiqamətləri də avtomatik olaraq uyğunlaşır:</p>
+            <h3><i class="fas fa-thumbtack"></i> <span>Smart Pin Sistemi</span></h3>
+            <p>Mobil cihazlarda panelləri istənilən halda (tam və ya daraldılmış) pin edə bilərsiniz:</p>
             <ul style="margin-left: 25px; line-height: 2;">
-                <li id="swappedItem1"><strong>Sol tərəfdə sağ panel:</strong> Sağa swipe ilə açılır</li>
-                <li id="swappedItem2"><strong>Sağ tərəfdə sol panel:</strong> Sola swipe ilə açılır</li>
-                <li id="swappedItem3"><strong>Sabitləmə düyməsi:</strong> Hər zaman panelin daxilində əks küncdə olur</li>
+                <li><strong>Tam pin:</strong> Sol panel 280px, main content avtomatik uyğunlaşır</li>
+                <li><strong>Daraldılmış pin:</strong> Sol panel 70px, main content daha geniş olur</li>
+                <li><strong>İki panel birlikdə:</strong> Hər iki panel eyni anda fərqli hallarda pin edilə bilər</li>
+                <li><strong>Ağıllı margin:</strong> Main content hər iki panelin hal-hazırkı ölçüsünə görə uyğunlaşır</li>
             </ul>
-        </div>
 
-        <div class="content-card">
-            <h2><i class="fas fa-star"></i> <span id="contentTitle2">Əsas Xüsusiyyətlər</span></h2>
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3 id="featureTitle1">Responsiv Dizayn</h3>
-                    <p id="featureDesc1">Səhifə bütün cihazlarda (telefon, planşet, kompüter) mükəmməl şəkildə görünür və işləyir. Mobil cihazlarda panellər tam ekran rejimində açılır.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-palette"></i>
-                    <h3 id="featureTitle2">Rəng Temaları</h3>
-                    <p id="featureDesc2">4 müxtəlif rəng teması mövcuddur: Mavi, Yaşıl, Bənövşəyi və Narıncı. Seçdiyiniz tema avtomatik saxlanılır və bütün elementlərə tətbiq edilir.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-moon"></i>
-                    <h3 id="featureTitle3">Gecə/Gündüz Rejimi</h3>
-                    <p id="featureDesc3">Gözlərinizi yormamaq üçün gecə rejimi aktivləşdirə bilərsiniz. Qaranlıq fon və uyğun rənglər daha rahat istifadə təmin edir.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-language"></i>
-                    <h3 id="featureTitle4">Çoxdilli Dəstək</h3>
-                    <p id="featureDesc4">4 dildə dəstək: Azərbaycan, Türk, İngilis və Rus dilləri. Seçdiyiniz dil bütün interfeys elementlərinə tətbiq edilir və saxlanılır.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-arrows-alt-h"></i>
-                    <h3 id="featureTitle5">Esnek Panel Sistemi</h3>
-                    <p id="featureDesc5">Sol və sağ panelləri istənilən tərəfə keçirə bilərsiniz. Həmçinin panelləri daraldıb genişləndirə bilərsiniz. Bu tənzimləmə də saxlanılır.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-save"></i>
-                    <h3 id="featureTitle6">Avtomatik Saxlama</h3>
-                    <p id="featureDesc6">Bütün tənzimləmələriniz avtomatik olaraq saxlanılır. Brauzeri bağlasanız belə, növbəti dəfə eyni parametrlərlə qarşılanacaqsınız.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-thumbtack"></i>
-                    <h3 id="featureTitle7">Panel Sabitləmə</h3>
-                    <p id="featureDesc7">Mobil cihazlarda açılan panelləri sabitləyə bilərsiniz. Sabitlənmiş panel overlay-ə basanda bağlanmır və istədiyiniz müddətə açıq qalır.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-hand-rock"></i>
-                    <h3 id="featureTitle8">Smart Touch Gesture</h3>
-                    <p id="featureDesc8">Swipe istiqamətləri panellərin yerləşməsinə avtomatik uyğunlaşır. Sol və sağ tərəflərin hər birində hansı panelin olmasından asılı olmayaraq düzgün işləyir.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="content-card">
-            <h2><i class="fas fa-book"></i> <span id="contentTitle3">İstifadə Təlimatı</span></h2>
-            
-            <h3><i class="fas fa-bars"></i> <span id="usageTitle1">Sol Panel (Naviqasiya)</span></h3>
-            <p id="usageText1">Sol paneldə əsas menyu bölmələri yerləşir. Hər hansı menyuya klikləməklə həmin bölməyə keçid edə bilərsiniz. Panel aşağısındakı ox düyməsi ilə daraldıla və genişləndirilə bilər.</p>
-            
-            <h3><i class="fas fa-th"></i> <span id="usageTitle2">Sağ Panel (Fəaliyyət)</span></h3>
-            <p id="usageText2">Sağ paneldə son fəaliyyətləriniz, bildirişlər və istifadəçi məlumatlarınız görünür. Bu panel də istənilən vaxt daraldıla bilər.</p>
-            
-            <h3><i class="fas fa-grip-horizontal"></i> <span id="usageTitle3">Alt Panel (Sürətli Giriş)</span></h3>
-            <p id="usageText3">Ekranın aşağı hissəsində sabit qalan alt paneldə ən çox istifadə edilən funksiyalara sürətli giriş düymələri yerləşir. Mobil cihazlarda bu panel vasitəsilə yan panelləri açıb bağlaya bilərsiniz.</p>
-            
-            <h3><i class="fas fa-cog"></i> <span id="usageTitle4">Tənzimləmələr</span></h3>
-            <p id="usageText4">Sol panelin aşağı hissəsində rəng teması, dil və digər tənzimləmələri dəyişə bilərsiniz. Bütün dəyişikliklər dərhal tətbiq edilir və avtomatik saxlanılır.</p>
-
-            <h3><i class="fas fa-mobile-screen"></i> <span id="usageTitle5">Mobil Cihazlarda İstifadə</span></h3>
-            <p id="usageText5">Mobil cihazlarda panelləri açmaq üçün üç üsul mövcuddur:</p>
+            <h3><i class="fas fa-lock"></i> <span>Məzmun Sabitləmə Rejimi</span></h3>
+            <p>"Məzmunu Sabitlə" düyməsi aktivdir və panellər dəyişdirilsə belə main content ölçüsü sabit qalır:</p>
             <ul style="margin-left: 25px; line-height: 2;">
-                <li id="mobileUsage1"><strong>Alt menyudan:</strong> "Sol Menyu" və "Sağ Menyu" düymələri ilə</li>
-                <li id="mobileUsage2"><strong>Swipe ilə:</strong> Ekranın kənarından içəriyə doğru barmaq sürüşdürmə</li>
-                <li id="mobileUsage3"><strong>Sabitləmə:</strong> Açılan paneldə sabitləmə düyməsinə basaraq paneli açıq saxlayın</li>
+                <li><strong>Sabit genişlik:</strong> Panel daraldılsa və ya genişləndirilsə, məzmun hərəkət etmir</li>
+                <li><strong>Panel yer dəyişməsi:</strong> Panellər sol-sağ yer dəyişdirsə belə məzmun sabit qalır</li>
+                <li><strong>İkon dəyişir:</strong> Düyməyə basanda kilit ikonu açıq/bağlı halını göstərir</li>
+                <li><strong>Yaddaşda saxlanır:</strong> Sabitləmə durumu localStorage-də qeyd edilir</li>
+            </ul>
+
+            <h3><i class="fas fa-sync-alt"></i> <span>Panellər Dəyişdikdə Davranış</span></h3>
+            <p>"Panelləri Dəyiş" düyməsi aktivdir və sol-sağ panelləri fiziki olaraq dəyişdirir:</p>
+            <ul style="margin-left: 25px; line-height: 2;">
+                <li><strong>Fiziki dəyişmə:</strong> Sol panel sağa, sağ panel sola keçir</li>
+                <li><strong>Swipe uyğunlaşır:</strong> Sol kənardan swipe yenə sol fiziki tərəfi açır</li>
+                <li><strong>Pin durumu:</strong> Dəyişdikdən sonra pin durumu sıfırlanır</li>
+                <li><strong>Məzmun sabitləmə:</strong> Əgər aktiv isə, məzmun ölçüsü dəyişməz</li>
             </ul>
         </div>
 
         <div class="content-card">
-            <h2><i class="fas fa-keyboard"></i> <span id="contentTitle4">Klaviatura Qısayolları</span></h2>
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <i class="fas fa-times"></i>
-                    <h3>ESC</h3>
-                    <p id="keyboardDesc1">Açıq olan panelləri və modal pəncərələri bağlamaq üçün ESC düyməsini istifadə edə bilərsiniz. Sabitlənmiş panellər ESC ilə bağlanmır.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-hand-pointer"></i>
-                    <h3>Swipe</h3>
-                    <p id="keyboardDesc2">Mobil cihazlarda ekranın kənarlarından içəriyə doğru sürüşdürərək panelləri aça bilərsiniz. Swipe istiqamətləri panellərin yerləşməsinə uyğundur.</p>
-                </div>
-            </div>
+            <h2><i class="fas fa-hand-pointer"></i> <span>Touch Gesture Sistemi</span></h2>
+            <p>Mobil cihazlarda panelləri açmaq üçün ekranın kənarlarından içəriyə doğru barmağınızı sürüşdürün:</p>
+            <ul style="margin-left: 25px; line-height: 2;">
+                <li><strong>50px kənar zona:</strong> Yalnız ekranın ilk 50px-dən başlayan swipe işləyir</li>
+                <li><strong>Minimum məsafə:</strong> 50px-dən az hərəkət panel açmır</li>
+                <li><strong>Şaquli filtr:</strong> Scroll hərəkətləri panel açmır</li>
+                <li><strong>Fiziki mövqe:</strong> Sol kənardan swipe həmişə sol fiziki tərəfi açır</li>
+            </ul>
         </div>
 
         <div class="content-card">
-            <h2><i class="fas fa-database"></i> <span id="contentTitle5">Məlumat Saxlama</span></h2>
-            <p id="storageText1">Bu səhifə HTML5 localStorage texnologiyasından istifadə edərək aşağıdakı məlumatları brauzerinizin yaddaşında saxlayır:</p>
+            <h2><i class="fas fa-database"></i> <span>Məlumat Saxlama</span></h2>
+            <p>Bu səhifə HTML5 localStorage texnologiyasından istifadə edərək aşağıdakı məlumatları saxlayır:</p>
             <ul style="margin-left: 25px; line-height: 2;">
-                <li id="storageItem1"><strong>Rəng Teması:</strong> Seçdiyiniz rəng palitrası (Mavi, Yaşıl, Bənövşəyi, Narıncı)</li>
-                <li id="storageItem2"><strong>Dil Seçimi:</strong> İnterfeys dili (AZ, TR, EN, RU)</li>
-                <li id="storageItem3"><strong>Görünüş Rejimi:</strong> Gündüz və ya Gecə rejimi</li>
-                <li id="storageItem4"><strong>Panel Düzülüşü:</strong> Panellərin sağda və ya solda olması</li>
+                <li><strong>Rəng Teması:</strong> Seçdiyiniz rəng palitrası</li>
+                <li><strong>Dil Seçimi:</strong> İnterfeys dili (AZ, RU)</li>
+                <li><strong>Görünüş Rejimi:</strong> Gündüz və ya Gecə rejimi</li>
+                <li><strong>Panel Düzülüşü:</strong> Panellərin sağda və ya solda olması</li>
+                <li><strong>Məzmun Sabitləməsi:</strong> Fixed content rejimi aktiv/qeyri-aktiv</li>
             </ul>
-            <p id="storageText2" style="margin-top: 15px;">Bu məlumatlar yalnız sizin brauzerinizdə saxlanılır və heç bir serverə göndərilmir. Məlumatları silmək üçün brauzerin cache/cookie parametrlərini təmizləməlisiniz.</p>
         </div>
 
     </div>
@@ -1295,20 +1276,20 @@
     <!-- Sağ Menü Paneli -->
     <div class="right-panel" id="rightPanel">
         <div class="panel-header">
-            <h3 id="activityTitle">Son Fəaliyyətlər</h3>
+            <h3>Son Fəaliyyətlər</h3>
             <button class="toggle-right" id="toggleRight">
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
         
         <div class="widget">
-            <h4 class="widget-title" id="todayTitle">Bu gün</h4>
+            <h4 class="widget-title">Bu gün</h4>
             <div class="activity-item">
                 <div class="activity-icon">
                     <i class="fas fa-file-upload"></i>
                 </div>
                 <div>
-                    <p id="activity1">Hesabat yükləndi</p>
+                    <p>Hesabat yükləndi</p>
                     <div class="activity-time">10:24</div>
                 </div>
             </div>
@@ -1317,20 +1298,20 @@
                     <i class="fas fa-user-plus"></i>
                 </div>
                 <div>
-                    <p id="activity2">Yeni istifadəçi əlavə edildi</p>
+                    <p>Yeni istifadəçi əlavə edildi</p>
                     <div class="activity-time">09:45</div>
                 </div>
             </div>
         </div>
         
         <div class="widget">
-            <h4 class="widget-title" id="yesterdayTitle">Dünən</h4>
+            <h4 class="widget-title">Dünən</h4>
             <div class="activity-item">
                 <div class="activity-icon">
                     <i class="fas fa-comment"></i>
                 </div>
                 <div>
-                    <p id="activity3">5 yeni mesaj</p>
+                    <p>5 yeni mesaj</p>
                     <div class="activity-time">18:30</div>
                 </div>
             </div>
@@ -1339,7 +1320,7 @@
                     <i class="fas fa-chart-line"></i>
                 </div>
                 <div>
-                    <p id="activity4">Analiz tamamlandı</p>
+                    <p>Analiz tamamlandı</p>
                     <div class="activity-time">16:15</div>
                 </div>
             </div>
@@ -1348,8 +1329,8 @@
         <div class="user-info">
             <div class="user-avatar">ƏM</div>
             <div>
-                <div class="user-name" id="userName">Əli Məmmədov</div>
-                <div class="user-role" id="userRole">Administrator</div>
+                <div class="user-name">Əli Məmmədov</div>
+                <div class="user-role">Administrator</div>
             </div>
         </div>
 
@@ -1384,163 +1365,38 @@
     </div>
 
     <script>
-        // Dil məlumatları (yalnız əsas hissələr göstərilir, tam versiya çox uzundur)
-        const translations = {
-            az: {
-                pageTitle: "Xoş Gəlmisiniz",
-                breadcrumb: "Ana Səhifə / Panel İdarəetməsi",
-                currentSettingsTitle: "Cari Tənzimləmələriniz",
-                currentSettingsDesc: "Aşağıdakı tənzimləmələriniz avtomatik olaraq saxlanılır və növbəti dəfə səhifəyə daxil olduğunuzda bərpa edilir.",
-                mainContentTitle1: "Panel Dizaynı Haqqında",
-                contentText1: "Bu səhifə müasir və funksional bir interfeys dizaynı təqdim edir. Sol panel naviqasiya menyusu kimi, sağ panel isə fəaliyyət və məlumat paneli kimi işləyir. Alt paneldə isə əsas əməliyyatlar üçün sürətli giriş düymələri yerləşir.",
-                contentText2: "Bütün tənzimləmələriniz (rəng teması, dil, panel düzülüşü və görünüş rejimi) brauzerin yaddaşında (localStorage) saxlanılır və növbəti dəfə səhifəyə daxil olduğunuzda avtomatik olaraq bərpa edilir.",
-                gestureTitle: "Touch Gesture İdarəetməsi",
-                gestureDesc1: "Mobil cihazlarda panelləri açmaq üçün ekranın kənarlarından içəriyə doğru barmağınızı sürüşdürün (swipe). Sistem panellərin yerləşməsinə uyğun olaraq işləyir:",
-                gestureDemoTitle: "Swipe İstiqamətləri",
-                swipeRightLabel: "Sağa Swipe",
-                swipeRightDesc: "Sol tərəfdəki paneli açar",
-                swipeLeftLabel: "Sola Swipe",
-                swipeLeftDesc: "Sağ tərəfdəki paneli açar",
-                pinFeatureTitle: "Panel Sabitləmə Funksiyası",
-                pinFeatureDesc1: "Mobil cihazlarda panel açıldığında aşağı sağ küncdə (və ya panellər dəyişdirilibsə sol küncdə) sabitləmə düyməsi görünür. Bu düyməyə basdıqda:",
-                pinFeature1: "Panel sabitleşir: Overlay-ə və ya başqa yerə klikləyəndə panel bağlanmır",
-                pinFeature2: "Düymə rəngi dəyişir: Sabitlənmiş vəziyyətdə düymə mavi rəngə çevrilir",
-                pinFeature3: "Yenidən basanda açılır: Sabitləməni götürmək üçün yenidən düyməyə basın",
-                swappedGestureTitle: "Panellər Dəyişdikdə",
-                swappedGestureDesc: "Əgər \"Panelləri Dəyiş\" düyməsini istifadə edərək panellərin yerini dəyişdirirsinizsə, swipe istiqamətləri də avtomatik olaraq uyğunlaşır:",
-                swappedItem1: "Sol tərəfdə sağ panel: Sağa swipe ilə açılır",
-                swappedItem2: "Sağ tərəfdə sol panel: Sola swipe ilə açılır",
-                swappedItem3: "Sabitləmə düyməsi: Hər zaman panelin daxilində əks küncdə olur",
-                contentTitle2: "Əsas Xüsusiyyətlər",
-                featureTitle1: "Responsiv Dizayn",
-                featureDesc1: "Səhifə bütün cihazlarda (telefon, planşet, kompüter) mükəmməl şəkildə görünür və işləyir. Mobil cihazlarda panellər tam ekran rejimində açılır.",
-                featureTitle2: "Rəng Temaları",
-                featureDesc2: "4 müxtəlif rəng teması mövcuddur: Mavi, Yaşıl, Bənövşəyi və Narıncı. Seçdiyiniz tema avtomatik saxlanılır və bütün elementlərə tətbiq edilir.",
-                featureTitle3: "Gecə/Gündüz Rejimi",
-                featureDesc3: "Gözlərinizi yormamaq üçün gecə rejimi aktivləşdirə bilərsiniz. Qaranlıq fon və uyğun rənglər daha rahat istifadə təmin edir.",
-                featureTitle4: "Çoxdilli Dəstək",
-                featureDesc4: "4 dildə dəstək: Azərbaycan, Türk, İngilis və Rus dilləri. Seçdiyiniz dil bütün interfeys elementlərinə tətbiq edilir və saxlanılır.",
-                featureTitle5: "Esnek Panel Sistemi",
-                featureDesc5: "Sol və sağ panelləri istənilən tərəfə keçirə bilərsiniz. Həmçinin panelləri daraldıb genişləndirə bilərsiniz. Bu tənzimləmə də saxlanılır.",
-                featureTitle6: "Avtomatik Saxlama",
-                featureDesc6: "Bütün tənzimləmələriniz avtomatik olaraq saxlanılır. Brauzeri bağlasanız belə, növbəti dəfə eyni parametrlərlə qarşılanacaqsınız.",
-                featureTitle7: "Panel Sabitləmə",
-                featureDesc7: "Mobil cihazlarda açılan panelləri sabitləyə bilərsiniz. Sabitlənmiş panel overlay-ə basanda bağlanmır və istədiyiniz müddətə açıq qalır.",
-                featureTitle8: "Smart Touch Gesture",
-                featureDesc8: "Swipe istiqamətləri panellərin yerləşməsinə avtomatik uyğunlaşır. Sol və sağ tərəflərin hər birində hansı panelin olmasından asılı olmayaraq düzgün işləyir.",
-                contentTitle3: "İstifadə Təlimatı",
-                usageTitle1: "Sol Panel (Naviqasiya)",
-                usageText1: "Sol paneldə əsas menyu bölmələri yerləşir. Hər hansı menyuya klikləməklə həmin bölməyə keçid edə bilərsiniz. Panel aşağısındakı ox düyməsi ilə daraldıla və genişləndirilə bilər.",
-                usageTitle2: "Sağ Panel (Fəaliyyət)",
-                usageText2: "Sağ paneldə son fəaliyyətləriniz, bildirişlər və istifadəçi məlumatlarınız görünür. Bu panel də istənilən vaxt daraldıla bilər.",
-                usageTitle3: "Alt Panel (Sürətli Giriş)",
-                usageText3: "Ekranın aşağı hissəsində sabit qalan alt paneldə ən çox istifadə edilən funksiyalara sürətli giriş düymələri yerləşir. Mobil cihazlarda bu panel vasitəsilə yan panelləri açıb bağlaya bilərsiniz.",
-                usageTitle4: "Tənzimləmələr",
-                usageText4: "Sol panelin aşağı hissəsində rəng teması, dil və digər tənzimləmələri dəyişə bilərsiniz. Bütün dəyişikliklər dərhal tətbiq edilir və avtomatik saxlanılır.",
-                usageTitle5: "Mobil Cihazlarda İstifadə",
-                usageText5: "Mobil cihazlarda panelləri açmaq üçün üç üsul mövcuddur:",
-                mobileUsage1: "Alt menyudan: \"Sol Menyu\" və \"Sağ Menyu\" düymələri ilə",
-                mobileUsage2: "Swipe ilə: Ekranın kənarından içəriyə doğru barmaq sürüşdürmə",
-                mobileUsage3: "Sabitləmə: Açılan paneldə sabitləmə düyməsinə basaraq paneli açıq saxlayın",
-                contentTitle4: "Klaviatura Qısayolları",
-                keyboardDesc1: "Açıq olan panelləri və modal pəncərələri bağlamaq üçün ESC düyməsini istifadə edə bilərsiniz. Sabitlənmiş panellər ESC ilə bağlanmır.",
-                keyboardDesc2: "Mobil cihazlarda ekranın kənarlarından içəriyə doğru sürüşdürərək panelləri aça bilərsiniz. Swipe istiqamətləri panellərin yerləşməsinə uyğundur.",
-                contentTitle5: "Məlumat Saxlama",
-                storageText1: "Bu səhifə HTML5 localStorage texnologiyasından istifadə edərək aşağıdakı məlumatları brauzerinizin yaddaşında saxlayır:",
-                storageItem1: "Rəng Teması: Seçdiyiniz rəng palitrası (Mavi, Yaşıl, Bənövşəyi, Narıncı)",
-                storageItem2: "Dil Seçimi: İnterfeys dili (AZ, TR, EN, RU)",
-                storageItem3: "Görünüş Rejimi: Gündüz və ya Gecə rejimi",
-                storageItem4: "Panel Düzülüşü: Panellərin sağda və ya solda olması",
-                storageText2: "Bu məlumatlar yalnız sizin brauzerinizdə saxlanılır və heç bir serverə göndərilmir. Məlumatları silmək üçün brauzerin cache/cookie parametrlərini təmizləməlisiniz.",
-                activityTitle: "Son Fəaliyyətlər",
-                todayTitle: "Bu gün",
-                activity1: "Hesabat yükləndi",
-                activity2: "Yeni istifadəçi əlavə edildi",
-                yesterdayTitle: "Dünən",
-                activity3: "5 yeni mesaj",
-                activity4: "Analiz tamamlandı",
-                userName: "Əli Məmmədov",
-                userRole: "Administrator",
-                themeToggle: "Gecə Rejimi",
-                dayToggle: "Gündüz Rejimi",
-                swapPanels: "Panelləri Dəyiş",
-                themeNames: {
-                    blue: "Mavi",
-                    green: "Yaşıl",
-                    purple: "Bənövşəyi",
-                    orange: "Narıncı"
-                },
-                languageNames: {
-                    az: "Azərbaycan",
-                    tr: "Türk",
-                    en: "İngilis",
-                    ru: "Rus"
-                },
-                modeNames: {
-                    light: "Gündüz",
-                    dark: "Gecə"
-                },
-                layoutNames: {
-                    normal: "Standart",
-                    swapped: "Dəyişdirilmiş"
-                }
-            },
-            // Digər dillər üçün tərcümələr (qısaldılmış versiya)
-            tr: {
-                pageTitle: "Hoş Geldiniz",
-                gestureTitle: "Touch Gesture Yönetimi",
-                pinFeatureTitle: "Panel Sabitleme Özelliği",
-                // ... digər tərcümələr
-            },
-            en: {
-                pageTitle: "Welcome",
-                gestureTitle: "Touch Gesture Management",
-                pinFeatureTitle: "Panel Pin Feature",
-                // ... digər tərcümələr
-            },
-            ru: {
-                pageTitle: "Добро пожаловать",
-                gestureTitle: "Управление жестами",
-                pinFeatureTitle: "Закрепление панели",
-                // ... digər tərcümələr
-            }
-        };
-
-        // LocalStorage-dən tənzimləmələri oxumaq
+        // LocalStorage funksiyaları
         function loadSettings() {
-            const savedTheme = localStorage.getItem('colorTheme') || 'blue';
-            const savedLanguage = localStorage.getItem('language') || 'az';
-            const savedDarkMode = localStorage.getItem('darkMode') === 'true';
-            const savedSwapped = localStorage.getItem('panelsSwapped') === 'true';
-
             return {
-                theme: savedTheme,
-                language: savedLanguage,
-                darkMode: savedDarkMode,
-                swapped: savedSwapped
+                theme: localStorage.getItem('colorTheme') || 'blue',
+                language: localStorage.getItem('language') || 'az',
+                darkMode: localStorage.getItem('darkMode') === 'true',
+                swapped: localStorage.getItem('panelsSwapped') === 'true',
+                fixedContent: localStorage.getItem('fixedContent') === 'true'
             };
         }
 
-        // Tənzimləməni localStorage-ə yazmaq
         function saveSetting(key, value) {
             localStorage.setItem(key, value);
             updateCurrentSettings();
         }
 
-        // Cari tənzimləmələri yeniləmək
         function updateCurrentSettings() {
             const settings = loadSettings();
-            const t = translations[currentLanguage];
-
-            document.getElementById('currentTheme').textContent = t.themeNames[settings.theme];
-            document.getElementById('currentLanguage').textContent = t.languageNames[settings.language];
-            document.getElementById('currentMode').textContent = settings.darkMode ? t.modeNames.dark : t.modeNames.light;
-            document.getElementById('currentLayout').textContent = settings.swapped ? t.layoutNames.swapped : t.layoutNames.normal;
+            const themeNames = {az: {blue: "Mavi", green: "Yaşıl", purple: "Bənövşəyi", orange: "Narıncı"}, ru: {blue: "Синий", green: "Зеленый", purple: "Фиолетовый", orange: "Оранжевый"}};
+            const langNames = {az: {az: "Azərbaycan", ru: "Rus"}, ru: {az: "Азербайджанский", ru: "Русский"}};
+            const modeNames = {az: {light: "Gündüz", dark: "Gecə"}, ru: {light: "Дневной", dark: "Ночной"}};
+            const layoutNames = {az: {normal: "Standart", swapped: "Dəyişdirilmiş"}, ru: {normal: "Стандартный", swapped: "Изменен"}};
+            
+            const lang = settings.language;
+            document.getElementById('currentTheme').textContent = themeNames[lang][settings.theme];
+            document.getElementById('currentLanguage').textContent = langNames[lang][settings.language];
+            document.getElementById('currentMode').textContent = settings.darkMode ? modeNames[lang].dark : modeNames[lang].light;
+            document.getElementById('currentLayout').textContent = settings.swapped ? layoutNames[lang].swapped : layoutNames[lang].normal;
         }
 
-        // Yüklənmiş tənzimləmələri tətbiq etmək
+        // Başlanğıc tənzimləmələr
         const initialSettings = loadSettings();
-        let currentLanguage = initialSettings.language;
 
         // DOM Elementləri
         const leftPanel = document.getElementById('leftPanel');
@@ -1548,13 +1404,14 @@
         const overlay = document.getElementById('overlay');
         const bottomMenuLeft = document.getElementById('bottomMenuLeft');
         const bottomMenuRight = document.getElementById('bottomMenuRight');
-        const bottomMenuHome = document.getElementById('bottomMenuHome');
         const leftPanelPin = document.getElementById('leftPanelPin');
         const rightPanelPin = document.getElementById('rightPanelPin');
+        const fixedContentBtn = document.getElementById('fixedContent');
 
         // Panel sabitləmə durumu
         let leftPanelPinned = false;
         let rightPanelPinned = false;
+        let isFixedContent = initialSettings.fixedContent;
 
         // Tənzimləmələri tətbiq etmək
         document.body.classList.add(initialSettings.theme + '-theme');
@@ -1563,6 +1420,12 @@
         }
         if (initialSettings.swapped) {
             document.body.classList.add('panels-swapped');
+        }
+        if (initialSettings.fixedContent) {
+            document.body.classList.add('fixed-content');
+            fixedContentBtn.querySelector('i').classList.remove('fa-lock');
+            fixedContentBtn.querySelector('i').classList.add('fa-lock-open');
+            fixedContentBtn.querySelector('span').textContent = 'Məzmunu Azad Et';
         }
 
         // Tema seçimlərini aktivləşdirmək
@@ -1579,142 +1442,166 @@
             }
         });
 
-        // Dili tətbiq etmək
-        updateLanguage();
         updateCurrentSettings();
 
-        // Sol paneli açma/bağlama
-        document.getElementById('toggleLeft').addEventListener('click', function() {
-            leftPanel.classList.toggle('collapsed');
-            const icon = this.querySelector('i');
-            icon.classList.toggle('fa-chevron-left');
-            icon.classList.toggle('fa-chevron-right');
-        });
+        // Panel vəziyyətlərini yeniləmək
+        function updatePanelStates() {
+            // Sol panel
+            if (leftPanelPinned) {
+                document.body.classList.add('left-pinned');
+                if (leftPanel.classList.contains('collapsed')) {
+                    document.body.classList.add('left-collapsed');
+                    document.body.classList.remove('left-full');
+                } else {
+                    document.body.classList.add('left-full');
+                    document.body.classList.remove('left-collapsed');
+                }
+            } else {
+                document.body.classList.remove('left-pinned', 'left-full', 'left-collapsed');
+            }
 
-        // Sağ paneli açma/bağlama
-        document.getElementById('toggleRight').addEventListener('click', function() {
-            rightPanel.classList.toggle('collapsed');
-            const icon = this.querySelector('i');
-            icon.classList.toggle('fa-chevron-right');
-            icon.classList.toggle('fa-chevron-left');
-        });
+            // Sağ panel
+            if (rightPanelPinned) {
+                document.body.classList.add('right-pinned');
+                if (rightPanel.classList.contains('collapsed')) {
+                    document.body.classList.add('right-collapsed');
+                    document.body.classList.remove('right-full');
+                } else {
+                    document.body.classList.add('right-full');
+                    document.body.classList.remove('right-collapsed');
+                }
+            } else {
+                document.body.classList.remove('right-pinned', 'right-full', 'right-collapsed');
+            }
+        }
 
-        // Sol panel sabitləmə düyməsi
+        // Sol panel sabitləmə
         leftPanelPin.addEventListener('click', function() {
             leftPanelPinned = !leftPanelPinned;
-            if (leftPanelPinned) {
-                this.classList.add('pinned');
-                leftPanel.classList.add('pinned');
-            } else {
-                this.classList.remove('pinned');
-                leftPanel.classList.remove('pinned');
-            }
+            this.classList.toggle('pinned');
+            leftPanel.classList.toggle('pinned');
+            updatePanelStates();
         });
 
-        // Sağ panel sabitləmə düyməsi
+        // Sağ panel sabitləmə
         rightPanelPin.addEventListener('click', function() {
             rightPanelPinned = !rightPanelPinned;
-            if (rightPanelPinned) {
-                this.classList.add('pinned');
-                rightPanel.classList.add('pinned');
+            this.classList.toggle('pinned');
+            rightPanel.classList.toggle('pinned');
+            updatePanelStates();
+        });
+
+        // Məzmun sabitləmə
+        fixedContentBtn.addEventListener('click', function() {
+            isFixedContent = !isFixedContent;
+            document.body.classList.toggle('fixed-content');
+            saveSetting('fixedContent', isFixedContent);
+            
+            const icon = this.querySelector('i');
+            const span = this.querySelector('span');
+            
+            if (isFixedContent) {
+                icon.classList.remove('fa-lock');
+                icon.classList.add('fa-lock-open');
+                span.textContent = 'Məzmunu Azad Et';
             } else {
-                this.classList.remove('pinned');
-                rightPanel.classList.remove('pinned');
+                icon.classList.remove('fa-lock-open');
+                icon.classList.add('fa-lock');
+                span.textContent = 'Məzmunu Sabitlə';
             }
         });
 
-        // Panelləri hansı tərəfdə olduqlarını müəyyən etmək
-        function getLeftSidePanel() {
+        // Fiziki tərəfdəki panelləri müəyyən etmək
+        function getPhysicalLeftPanel() {
             return document.body.classList.contains('panels-swapped') ? rightPanel : leftPanel;
         }
 
-        function getRightSidePanel() {
+        function getPhysicalRightPanel() {
             return document.body.classList.contains('panels-swapped') ? leftPanel : rightPanel;
         }
 
-        // Alt menyudan sol tərəfdəki paneli açma/bağlama
+        // Alt menyudan fiziki sol tərəfi açma
         bottomMenuLeft.addEventListener('click', function() {
-            const panel = getLeftSidePanel();
+            const panel = getPhysicalLeftPanel();
+            const otherPanel = getPhysicalRightPanel();
+            
             const isOpen = panel.classList.toggle('mobile-open');
-            const otherPanel = getRightSidePanel();
             
             if (isOpen) {
                 otherPanel.classList.remove('mobile-open');
                 overlay.classList.add('active');
                 overlay.style.display = 'block';
             } else {
-                overlay.classList.remove('active');
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 300);
+                if (!otherPanel.classList.contains('mobile-open')) {
+                    overlay.classList.remove('active');
+                    setTimeout(() => overlay.style.display = 'none', 300);
+                }
             }
         });
 
-        // Alt menyudan sağ tərəfdəki paneli açma/bağlama
+        // Alt menyudan fiziki sağ tərəfi açma
         bottomMenuRight.addEventListener('click', function() {
-            const panel = getRightSidePanel();
+            const panel = getPhysicalRightPanel();
+            const otherPanel = getPhysicalLeftPanel();
+            
             const isOpen = panel.classList.toggle('mobile-open');
-            const otherPanel = getLeftSidePanel();
             
             if (isOpen) {
                 otherPanel.classList.remove('mobile-open');
                 overlay.classList.add('active');
                 overlay.style.display = 'block';
             } else {
-                overlay.classList.remove('active');
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 300);
+                if (!otherPanel.classList.contains('mobile-open')) {
+                    overlay.classList.remove('active');
+                    setTimeout(() => overlay.style.display = 'none', 300);
+                }
             }
         });
 
-        // Overlay-ə klikləyincə panelləri bağlama (sabitlənmiş panellər istisna olmaqla)
+        // Overlay-ə klikləmə
         overlay.addEventListener('click', function() {
-            const leftSidePanel = getLeftSidePanel();
-            const rightSidePanel = getRightSidePanel();
+            const physicalLeftPanel = getPhysicalLeftPanel();
+            const physicalRightPanel = getPhysicalRightPanel();
             
-            if (!leftPanelPinned && leftSidePanel.classList.contains('mobile-open')) {
-                leftSidePanel.classList.remove('mobile-open');
+            const leftIsPinned = (physicalLeftPanel === leftPanel && leftPanelPinned) || 
+                                 (physicalLeftPanel === rightPanel && rightPanelPinned);
+            const rightIsPinned = (physicalRightPanel === leftPanel && leftPanelPinned) || 
+                                  (physicalRightPanel === rightPanel && rightPanelPinned);
+            
+            if (!leftIsPinned && physicalLeftPanel.classList.contains('mobile-open')) {
+                physicalLeftPanel.classList.remove('mobile-open');
             }
-            if (!rightPanelPinned && rightSidePanel.classList.contains('mobile-open')) {
-                rightSidePanel.classList.remove('mobile-open');
+            if (!rightIsPinned && physicalRightPanel.classList.contains('mobile-open')) {
+                physicalRightPanel.classList.remove('mobile-open');
             }
             
-            // Hər iki panel bağlandısa overlay-i gizlət
             if (!leftPanel.classList.contains('mobile-open') && !rightPanel.classList.contains('mobile-open')) {
                 this.classList.remove('active');
-                setTimeout(() => {
-                    this.style.display = 'none';
-                }, 300);
+                setTimeout(() => this.style.display = 'none', 300);
             }
         });
 
         // Menyu elementlərinə klikləmə
-        const menuItems = document.querySelectorAll('.menu-item');
-        menuItems.forEach(item => {
+        document.querySelectorAll('.menu-item').forEach(item => {
             item.addEventListener('click', function() {
-                menuItems.forEach(i => i.classList.remove('active'));
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
                 this.classList.add('active');
                 
-                // Mobil cihazlarda sabitlənməmiş paneli bağlama
                 if (window.innerWidth <= 768 && !leftPanelPinned) {
                     leftPanel.classList.remove('mobile-open');
                     if (!rightPanel.classList.contains('mobile-open')) {
                         overlay.classList.remove('active');
-                        setTimeout(() => {
-                            overlay.style.display = 'none';
-                        }, 300);
+                        setTimeout(() => overlay.style.display = 'none', 300);
                     }
                 }
             });
         });
 
-        // Alt menyu elementləri üçün aktiv status
-        const bottomMenuItems = document.querySelectorAll('.bottom-menu-item');
-        bottomMenuItems.forEach(item => {
+        // Alt menyu elementləri
+        document.querySelectorAll('.bottom-menu-item').forEach(item => {
             if (item.id !== 'bottomMenuLeft' && item.id !== 'bottomMenuRight') {
                 item.addEventListener('click', function() {
-                    bottomMenuItems.forEach(i => {
+                    document.querySelectorAll('.bottom-menu-item').forEach(i => {
                         if (i.id !== 'bottomMenuLeft' && i.id !== 'bottomMenuRight') {
                             i.classList.remove('active');
                         }
@@ -1724,59 +1611,56 @@
             }
         });
 
-        // Gecə/Gündüz rejimini dəyişdirmə
+        // Gecə/Gündüz rejimi
         document.getElementById('themeToggle').addEventListener('click', function() {
             const isDarkMode = document.body.classList.toggle('dark-mode');
             saveSetting('darkMode', isDarkMode);
             
             const icon = this.querySelector('i');
             const span = this.querySelector('span');
-            const t = translations[currentLanguage];
             
             if (isDarkMode) {
                 icon.classList.remove('fa-moon');
                 icon.classList.add('fa-sun');
-                span.textContent = t.dayToggle;
+                span.textContent = 'Gündüz Rejimi';
             } else {
                 icon.classList.remove('fa-sun');
                 icon.classList.add('fa-moon');
-                span.textContent = t.themeToggle;
+                span.textContent = 'Gecə Rejimi';
             }
         });
 
-        // Temanı dəyişdirmə
-        const themeOptions = document.querySelectorAll('.theme-option');
-        themeOptions.forEach(option => {
+        // Tema dəyişdirmə
+        document.querySelectorAll('.theme-option').forEach(option => {
             option.addEventListener('click', function() {
-                themeOptions.forEach(o => o.classList.remove('active'));
+                document.querySelectorAll('.theme-option').forEach(o => o.classList.remove('active'));
                 this.classList.add('active');
                 
                 const theme = this.getAttribute('data-theme');
-                document.body.className = document.body.className.replace(/\b\w+-theme\b/g, '');
                 
-                // Dark mode və swapped durumunu saxlama
                 const isDark = document.body.classList.contains('dark-mode');
                 const isPanelsSwapped = document.body.classList.contains('panels-swapped');
+                const isLeftPinned = document.body.classList.contains('left-pinned');
+                const isRightPinned = document.body.classList.contains('right-pinned');
+                const isLeftFull = document.body.classList.contains('left-full');
+                const isLeftCollapsed = document.body.classList.contains('left-collapsed');
+                const isRightFull = document.body.classList.contains('right-full');
+                const isRightCollapsed = document.body.classList.contains('right-collapsed');
+                const isFixed = document.body.classList.contains('fixed-content');
                 
                 document.body.className = '';
                 if (isDark) document.body.classList.add('dark-mode');
-                if (isPanelsSwapped) document.body.classList.add('panels-swapped');
+                if (isPanelsSwapped)document.body.classList.add('panels-swapped');
+                if (isLeftPinned) document.body.classList.add('left-pinned');
+                if (isRightPinned) document.body.classList.add('right-pinned');
+                if (isLeftFull) document.body.classList.add('left-full');
+                if (isLeftCollapsed) document.body.classList.add('left-collapsed');
+                if (isRightFull) document.body.classList.add('right-full');
+                if (isRightCollapsed) document.body.classList.add('right-collapsed');
+                if (isFixed) document.body.classList.add('fixed-content');
                 document.body.classList.add(theme + '-theme');
                 
                 saveSetting('colorTheme', theme);
-            });
-        });
-
-        // Dili dəyişdirmə
-        const languageOptions = document.querySelectorAll('.language-option');
-        languageOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                languageOptions.forEach(o => o.classList.remove('active'));
-                this.classList.add('active');
-                
-                currentLanguage = this.getAttribute('data-lang');
-                saveSetting('language', currentLanguage);
-                updateLanguage();
             });
         });
 
@@ -1785,117 +1669,20 @@
             const isSwapped = document.body.classList.toggle('panels-swapped');
             saveSetting('panelsSwapped', isSwapped);
             
-            // Panelləri bağlama və pin durumunu sıfırlama
             leftPanel.classList.remove('mobile-open');
             rightPanel.classList.remove('mobile-open');
             leftPanelPinned = false;
             rightPanelPinned = false;
             leftPanelPin.classList.remove('pinned');
             rightPanelPin.classList.remove('pinned');
+            updatePanelStates();
             overlay.classList.remove('active');
             overlay.style.display = 'none';
         });
 
-        // Dili yeniləmə funksiyası
-        function updateLanguage() {
-            const t = translations[currentLanguage];
-            
-            // Əsas səhifə elementləri
-            document.getElementById('pageTitle').textContent = t.pageTitle;
-            document.getElementById('breadcrumb').textContent = t.breadcrumb;
-            document.getElementById('currentSettingsTitle').textContent = t.currentSettingsTitle;
-            document.getElementById('currentSettingsDesc').textContent = t.currentSettingsDesc;
-            
-            // Məzmun başlıqları
-            document.getElementById('mainContentTitle1').textContent = t.mainContentTitle1;
-            document.getElementById('contentText1').textContent = t.contentText1;
-            document.getElementById('contentText2').textContent = t.contentText2;
-            
-            // Gesture bölməsi
-            document.getElementById('gestureTitle').textContent = t.gestureTitle;
-            document.getElementById('gestureDesc1').textContent = t.gestureDesc1;
-            document.getElementById('gestureDemoTitle').textContent = t.gestureDemoTitle;
-            document.getElementById('swipeRightLabel').textContent = t.swipeRightLabel;
-            document.getElementById('swipeRightDesc').textContent = t.swipeRightDesc;
-            document.getElementById('swipeLeftLabel').textContent = t.swipeLeftLabel;
-            document.getElementById('swipeLeftDesc').textContent = t.swipeLeftDesc;
-            
-            // Pin xüsusiyyətləri
-            document.getElementById('pinFeatureTitle').textContent = t.pinFeatureTitle;
-            document.getElementById('pinFeatureDesc1').textContent = t.pinFeatureDesc1;
-            document.getElementById('pinFeature1').innerHTML = '<strong>' + t.pinFeature1.split(':')[0] + ':</strong> ' + t.pinFeature1.split(':')[1];
-            document.getElementById('pinFeature2').innerHTML = '<strong>' + t.pinFeature2.split(':')[0] + ':</strong> ' + t.pinFeature2.split(':')[1];
-            document.getElementById('pinFeature3').innerHTML = '<strong>' + t.pinFeature3.split(':')[0] + ':</strong> ' + t.pinFeature3.split(':')[1];
-            
-            // Swapped gesture
-            document.getElementById('swappedGestureTitle').textContent = t.swappedGestureTitle;
-            document.getElementById('swappedGestureDesc').textContent = t.swappedGestureDesc;
-            document.getElementById('swappedItem1').innerHTML = '<strong>' + t.swappedItem1.split(':')[0] + ':</strong> ' + t.swappedItem1.split(':')[1];
-            document.getElementById('swappedItem2').innerHTML = '<strong>' + t.swappedItem2.split(':')[0] + ':</strong> ' + t.swappedItem2.split(':')[1];
-            document.getElementById('swappedItem3').innerHTML = '<strong>' + t.swappedItem3.split(':')[0] + ':</strong> ' + t.swappedItem3.split(':')[1];
-            
-            // Xüsusiyyətlər
-            document.getElementById('contentTitle2').textContent = t.contentTitle2;
-            for (let i = 1; i <= 8; i++) {
-                document.getElementById('featureTitle' + i).textContent = t['featureTitle' + i];
-                document.getElementById('featureDesc' + i).textContent = t['featureDesc' + i];
-            }
-            
-            // İstifadə təlimatı
-            document.getElementById('contentTitle3').textContent = t.contentTitle3;
-            for (let i = 1; i <= 5; i++) {
-                document.getElementById('usageTitle' + i).textContent = t['usageTitle' + i];
-                if (document.getElementById('usageText' + i)) {
-                    document.getElementById('usageText' + i).textContent = t['usageText' + i];
-                }
-            }
-            document.getElementById('mobileUsage1').innerHTML = '<strong>' + t.mobileUsage1.split(':')[0] + ':</strong> ' + t.mobileUsage1.split(':')[1];
-            document.getElementById('mobileUsage2').innerHTML = '<strong>' + t.mobileUsage2.split(':')[0] + ':</strong> ' + t.mobileUsage2.split(':')[1];
-            document.getElementById('mobileUsage3').innerHTML = '<strong>' + t.mobileUsage3.split(':')[0] + ':</strong> ' + t.mobileUsage3.split(':')[1];
-            
-            // Klaviatura və saxlama
-            document.getElementById('contentTitle4').textContent = t.contentTitle4;
-            document.getElementById('keyboardDesc1').textContent = t.keyboardDesc1;
-            document.getElementById('keyboardDesc2').textContent = t.keyboardDesc2;
-            document.getElementById('contentTitle5').textContent = t.contentTitle5;
-            document.getElementById('storageText1').textContent = t.storageText1;
-            document.getElementById('storageItem1').innerHTML = '<strong>' + t.storageItem1.split(':')[0] + ':</strong> ' + t.storageItem1.split(':')[1];
-            document.getElementById('storageItem2').innerHTML = '<strong>' + t.storageItem2.split(':')[0] + ':</strong> ' + t.storageItem2.split(':')[1];
-            document.getElementById('storageItem3').innerHTML = '<strong>' + t.storageItem3.split(':')[0] + ':</strong> ' + t.storageItem3.split(':')[1];
-            document.getElementById('storageItem4').innerHTML = '<strong>' + t.storageItem4.split(':')[0] + ':</strong> ' + t.storageItem4.split(':')[1];
-            document.getElementById('storageText2').textContent = t.storageText2;
-            
-            // Sağ panel
-            document.getElementById('activityTitle').textContent = t.activityTitle;
-            document.getElementById('todayTitle').textContent = t.todayTitle;
-            document.getElementById('activity1').textContent = t.activity1;
-            document.getElementById('activity2').textContent = t.activity2;
-            document.getElementById('yesterdayTitle').textContent = t.yesterdayTitle;
-            document.getElementById('activity3').textContent = t.activity3;
-            document.getElementById('activity4').textContent = t.activity4;
-            document.getElementById('userName').textContent = t.userName;
-            document.getElementById('userRole').textContent = t.userRole;
-            
-            // Tema düyməsi
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            if (isDarkMode) {
-                document.querySelector('#themeToggle span').textContent = t.dayToggle;
-            } else {
-                document.querySelector('#themeToggle span').textContent = t.themeToggle;
-            }
-            
-            document.querySelector('#swapPanels span').textContent = t.swapPanels;
-            
-            // Cari tənzimləmələri yeniləmək
-            updateCurrentSettings();
-        }
-
-        // Pəncərə ölçüsü dəyişikliklərini idarə etmə
+        // Pəncərə ölçüsü dəyişiklikləri
         function handleResize() {
-            const width = window.innerWidth;
-            
-            // 768px-dən böyük ekranlarda overlay-i və sabitləmələri bağlama
-            if (width > 768) {
+            if (window.innerWidth > 768) {
                 leftPanel.classList.remove('mobile-open');
                 rightPanel.classList.remove('mobile-open');
                 overlay.classList.remove('active');
@@ -1904,111 +1691,184 @@
                 rightPanelPinned = false;
                 leftPanelPin.classList.remove('pinned');
                 rightPanelPin.classList.remove('pinned');
+                updatePanelStates();
             }
         }
 
-        // Səhifə yükləndikdə və pəncərə ölçüsü dəyişdikdə işləmə
         window.addEventListener('load', handleResize);
         window.addEventListener('resize', handleResize);
 
-        // Touch hadisələri üçün (mobil swipe) - İyileşdirilmiş versiya
+        // TOUCH GESTURE SİSTEMİ
         let touchStartX = 0;
         let touchStartY = 0;
         let touchEndX = 0;
         let touchEndY = 0;
+        const SWIPE_THRESHOLD = 50;
+        const EDGE_ZONE = 50;
 
         document.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-            touchStartY = e.changedTouches[0].screenY;
-        }, false);
+            touchStartX = e.changedTouches[0].clientX;
+            touchStartY = e.changedTouches[0].clientY;
+        }, { passive: true });
 
         document.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            touchEndY = e.changedTouches[0].screenY;
+            touchEndX = e.changedTouches[0].clientX;
+            touchEndY = e.changedTouches[0].clientY;
             handleSwipe();
-        }, false);
+        }, { passive: true });
 
         function handleSwipe() {
-            const swipeThreshold = 50;
+            if (window.innerWidth > 768) return;
+
             const diffX = touchEndX - touchStartX;
             const diffY = Math.abs(touchEndY - touchStartY);
+            const screenWidth = window.innerWidth;
             
-            // Şaquli hərəkət üfüqi hərəkətdən çox olarsa swipe sayılmır
-            if (diffY > Math.abs(diffX)) {
+            // Şaquli hərəkət filtrləməsi
+            if (diffY > Math.abs(diffX) * 1.5) {
                 return;
             }
             
-            if (window.innerWidth <= 768) {
-                const leftSidePanel = getLeftSidePanel();
-                const rightSidePanel = getRightSidePanel();
-                
-                // Sağa swipe - sol tərəfdəki paneli açma
-                if (diffX > swipeThreshold && touchStartX < 50) {
-                    leftSidePanel.classList.add('mobile-open');
-                    rightSidePanel.classList.remove('mobile-open');
+            // Minimum məsafə
+            if (Math.abs(diffX) < SWIPE_THRESHOLD) {
+                return;
+            }
+
+            const physicalLeftPanel = getPhysicalLeftPanel();
+            const physicalRightPanel = getPhysicalRightPanel();
+            
+            const leftIsPinned = (physicalLeftPanel === leftPanel && leftPanelPinned) || 
+                                 (physicalLeftPanel === rightPanel && rightPanelPinned);
+            const rightIsPinned = (physicalRightPanel === leftPanel && leftPanelPinned) || 
+                                  (physicalRightPanel === rightPanel && rightPanelPinned);
+
+            // Sol kənardan sağa swipe
+            if (diffX > SWIPE_THRESHOLD && touchStartX < EDGE_ZONE) {
+                if (!physicalLeftPanel.classList.contains('mobile-open')) {
+                    physicalLeftPanel.classList.add('mobile-open');
+                    physicalRightPanel.classList.remove('mobile-open');
                     overlay.classList.add('active');
                     overlay.style.display = 'block';
                 }
-                
-                // Sola swipe - sağ tərəfdəki paneli açma
-                if (diffX < -swipeThreshold && touchStartX > window.innerWidth - 50) {
-                    rightSidePanel.classList.add('mobile-open');
-                    leftSidePanel.classList.remove('mobile-open');
+                return;
+            }
+            
+            // Sağ kənardan sola swipe
+            if (diffX < -SWIPE_THRESHOLD && touchStartX > (screenWidth - EDGE_ZONE)) {
+                if (!physicalRightPanel.classList.contains('mobile-open')) {
+                    physicalRightPanel.classList.add('mobile-open');
+                    physicalLeftPanel.classList.remove('mobile-open');
                     overlay.classList.add('active');
                     overlay.style.display = 'block';
                 }
-                
-                // Sola swipe - sol tərəfdəki açıq paneli bağlama (sabitlənməmiş isə)
-                if (diffX < -swipeThreshold && leftSidePanel.classList.contains('mobile-open')) {
-                    const isPinned = (leftSidePanel === leftPanel && leftPanelPinned) || 
-                                   (leftSidePanel === rightPanel && rightPanelPinned);
-                    if (!isPinned) {
-                        leftSidePanel.classList.remove('mobile-open');
-                        if (!rightSidePanel.classList.contains('mobile-open')) {
-                            overlay.classList.remove('active');
-                            setTimeout(() => {
-                                overlay.style.display = 'none';
-                            }, 300);
-                        }
-                    }
+                return;
+            }
+            
+            // Açıq sol paneli bağlama
+            if (diffX < -SWIPE_THRESHOLD && physicalLeftPanel.classList.contains('mobile-open') && !leftIsPinned) {
+                physicalLeftPanel.classList.remove('mobile-open');
+                if (!physicalRightPanel.classList.contains('mobile-open')) {
+                    overlay.classList.remove('active');
+                    setTimeout(() => overlay.style.display = 'none', 300);
                 }
-                
-                // Sağa swipe - sağ tərəfdəki açıq paneli bağlama (sabitlənməmiş isə)
-                if (diffX > swipeThreshold && rightSidePanel.classList.contains('mobile-open')) {
-                    const isPinned = (rightSidePanel === leftPanel && leftPanelPinned) || 
-                                   (rightSidePanel === rightPanel && rightPanelPinned);
-                    if (!isPinned) {
-                        rightSidePanel.classList.remove('mobile-open');
-                        if (!leftSidePanel.classList.contains('mobile-open')) {
-                            overlay.classList.remove('active');
-                            setTimeout(() => {
-                                overlay.style.display = 'none';
-                            }, 300);
-                        }
-                    }
+                return;
+            }
+            
+            // Açıq sağ paneli bağlama
+            if (diffX > SWIPE_THRESHOLD && physicalRightPanel.classList.contains('mobile-open') && !rightIsPinned) {
+                physicalRightPanel.classList.remove('mobile-open');
+                if (!physicalLeftPanel.classList.contains('mobile-open')) {
+                    overlay.classList.remove('active');
+                    setTimeout(() => overlay.style.display = 'none', 300);
                 }
+                return;
             }
         }
 
-        // Klaviatura naviqasiyası (ESC düyməsi ilə menyu bağlama)
+        // Klaviatura naviqasiyası (ESC)
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                // Sabitlənməmiş panelləri bağlama
-                if (!leftPanelPinned) {
-                    leftPanel.classList.remove('mobile-open');
+                const physicalLeftPanel = getPhysicalLeftPanel();
+                const physicalRightPanel = getPhysicalRightPanel();
+                
+                const leftIsPinned = (physicalLeftPanel === leftPanel && leftPanelPinned) || 
+                                     (physicalLeftPanel === rightPanel && rightPanelPinned);
+                const rightIsPinned = (physicalRightPanel === leftPanel && leftPanelPinned) || 
+                                      (physicalRightPanel === rightPanel && rightPanelPinned);
+                
+                if (!leftIsPinned) {
+                    physicalLeftPanel.classList.remove('mobile-open');
                 }
-                if (!rightPanelPinned) {
-                    rightPanel.classList.remove('mobile-open');
+                if (!rightIsPinned) {
+                    physicalRightPanel.classList.remove('mobile-open');
                 }
                 
-                // Hər iki panel bağlandısa overlay-i gizlət
                 if (!leftPanel.classList.contains('mobile-open') && !rightPanel.classList.contains('mobile-open')) {
                     overlay.classList.remove('active');
-                    setTimeout(() => {
-                        overlay.style.display = 'none';
-                    }, 300);
+                    setTimeout(() => overlay.style.display = 'none', 300);
                 }
             }
+        });
+
+        // Panel toggle düymələri (Desktop)
+        document.getElementById('toggleLeft').addEventListener('click', function() {
+            leftPanel.classList.toggle('collapsed');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-chevron-left');
+            icon.classList.toggle('fa-chevron-right');
+            
+            // Əgər panel mobil-də pin edilibsə, vəziyyəti yeniləmək
+            if (leftPanelPinned) {
+                updatePanelStates();
+            }
+        });
+
+        document.getElementById('toggleRight').addEventListener('click', function() {
+            rightPanel.classList.toggle('collapsed');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-chevron-right');
+            icon.classList.toggle('fa-chevron-left');
+            
+            // Əgər panel mobil-də pin edilibsə, vəziyyəti yeniləmək
+            if (rightPanelPinned) {
+                updatePanelStates();
+            }
+        });
+
+        // Dil dəyişdirmə
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.language-option').forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+                
+                const lang = this.getAttribute('data-lang');
+                saveSetting('language', lang);
+                
+                // Dil dəyişdikdə UI mətnlərini yeniləmək
+                if (lang === 'ru') {
+                    document.querySelector('.page-title').textContent = 'Добро пожаловать';
+                    document.querySelector('.breadcrumb').textContent = 'Главная / Управление панелью';
+                    
+                    const isDark = document.body.classList.contains('dark-mode');
+                    document.querySelector('#themeToggle span').textContent = isDark ? 'Дневной режим' : 'Ночной режим';
+                    document.querySelector('#swapPanels span').textContent = 'Поменять панели';
+                    
+                    const isFixed = document.body.classList.contains('fixed-content');
+                    document.querySelector('#fixedContent span').textContent = isFixed ? 'Освободить контент' : 'Закрепить контент';
+                } else {
+                    document.querySelector('.page-title').textContent = 'Xoş Gəlmisiniz';
+                    document.querySelector('.breadcrumb').textContent = 'Ana Səhifə / Panel İdarəetməsi';
+                    
+                    const isDark = document.body.classList.contains('dark-mode');
+                    document.querySelector('#themeToggle span').textContent = isDark ? 'Gündüz Rejimi' : 'Gecə Rejimi';
+                    document.querySelector('#swapPanels span').textContent = 'Panelləri Dəyiş';
+                    
+                    const isFixed = document.body.classList.contains('fixed-content');
+                    document.querySelector('#fixedContent span').textContent = isFixed ? 'Məzmunu Azad Et' : 'Məzmunu Sabitlə';
+                }
+                
+                updateCurrentSettings();
+            });
         });
     </script>
 </body>
